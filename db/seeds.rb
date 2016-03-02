@@ -9,6 +9,10 @@ posts = Post.all
     Comment.create!(post: posts.sample, body: RandomData.random_paragraph)
 end
 
+unique_post = Post.find_or_create_by(title: "Unique Post", body: "Unique Post Body")
+unique_post.comments.create(body: "Unique Comment")
+
+puts "#{unique_post} unique seed"
 puts "Seed finished"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
