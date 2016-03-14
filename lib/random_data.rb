@@ -22,5 +22,5 @@ module RandomData
         letters.shuffle!
         letters[0,rand(4..10)].join
     end
-
+    
 end
