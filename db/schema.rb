@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20160321003448) do
+=======
+ActiveRecord::Schema.define(version: 20160314055405) do
+>>>>>>> 548638f6c39d4760afc7be494b8d9cfe373f06da
 
   create_table "advertisments", force: :cascade do |t|
     t.string   "title"
@@ -46,6 +50,14 @@ ActiveRecord::Schema.define(version: 20160321003448) do
     t.text     "description"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.boolean  "resolved"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
