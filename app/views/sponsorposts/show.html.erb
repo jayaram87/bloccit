@@ -1,0 +1,11 @@
+<h1><%= @sponsor_post.title %></h1>
+ 
+<div class="row">
+  <div class="col-md-8">
+    <h4><%= @sponsor_post.body %></h4>
+    <p><%= @sponsor_post.price %></p>
+  </div>
+  <div class="col-md-4">
+    <%= link_to "Edit", edit_topic_sponsorpost_path(@sponsor_post.topic, @sponsor_post), class: 'btn btn-success' %>
+  </div>
+</div>
