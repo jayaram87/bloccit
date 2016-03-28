@@ -11,15 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20160321003448) do
-=======
-ActiveRecord::Schema.define(version: 20160314055405) do
->>>>>>> 548638f6c39d4760afc7be494b8d9cfe373f06da
-=======
 ActiveRecord::Schema.define(version: 20160327233842) do
->>>>>>> checkpoint-36
 
   create_table "advertisments", force: :cascade do |t|
     t.string   "title"
@@ -48,6 +40,14 @@ ActiveRecord::Schema.define(version: 20160327233842) do
 
   add_index "posts", ["topic_id"], name: "index_posts_on_topic_id"
 
+  create_table "questions", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.boolean  "resolved"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sponsor_posts", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
@@ -67,21 +67,12 @@ ActiveRecord::Schema.define(version: 20160327233842) do
     t.datetime "updated_at",                 null: false
   end
 
-<<<<<<< HEAD
-  create_table "questions", force: :cascade do |t|
-    t.string   "title"
-    t.text     "body"
-    t.boolean  "resolved"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-=======
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
->>>>>>> checkpoint-36
   end
 
 end
