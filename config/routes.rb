@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :questions
 
   resources :users, only: [:new, :create]
+  
+  resources :sessions, only: [:new, :create, :destroy]
 
   get 'about' => 'welcome#about'
   
