@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   end
   
   resources :topics do
-    resources :sponsorposts, except: [:index]
+    resources :sponsor_posts, except: [:index]
   end
 
   get 'about' => 'welcome#about'

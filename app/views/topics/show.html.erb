@@ -23,7 +23,7 @@
             <div class="media">
                 <div class="media-body">
                     <h2 class="media-heading">
-                        <%= link_to p.title, topic_sponsorpost_path(@topic, p) %>
+                        <%= link_to p.title, topic_sponsor_post_path(@topic, p) %>
                     </h2>
                 </div>
             </div>
@@ -31,6 +31,6 @@
    </div>
    <div class="col-md-4">
        <%= link_to "New Post", new_topic_post_path(@topic), class: 'btn btn-success' %>
-       <%= link_to "New Sponsor Post", new_topic_sponsorpost_path(@topic), class: 'btn btn-success' %>
+       <%= link_to "New Sponsor Post", new_topic_sponsor_post_path(@topic), class: 'btn btn-success' %>
    </div>
 </div>
