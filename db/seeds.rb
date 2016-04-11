@@ -24,8 +24,8 @@ end
     Question.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: false)
 end
 
-user = User.first
-user.update_attributes!(email: 'jayaramraja1987@gmail.com', password: 'helloword')
+admin = User.create!(name: 'Admin', email: 'admin@bloccit.com', password: 'helloworld', role: 'admin')
+member = User.create!(name: 'Member', email: 'member@bloccit.com', password: 'hellobloccit')
 
 puts "Seed finished"
 puts "#{User.count} users created"
