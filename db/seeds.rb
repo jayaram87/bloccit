@@ -26,6 +26,7 @@ end
 
 admin = User.create!(name: 'Admin', email: 'admin@bloccit.com', password: 'helloworld', role: 'admin')
 member = User.create!(name: 'Member', email: 'member@bloccit.com', password: 'hellobloccit')
+moderator = User.create!(name: 'Moderator', email: 'moderator@bloccit.com', password: 'helloworld1', role: 'moderator')
 
 puts "Seed finished"
 puts "#{User.count} users created"
