@@ -1,0 +1,4 @@
+<div class="form-group">
+    <%= f.label :labels, class: 'form-control' %>
+    <%= f.text_field :labels, class: 'form-control', placeholder: "Enter the labels (separated by commas)", value: labels.map(&:name).join(', ') %>
+</div>
