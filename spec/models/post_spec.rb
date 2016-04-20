@@ -87,4 +87,15 @@ RSpec.describe Post, type: :model do
     end
   end
   
+  describe "#create_vote" do
+    it "creates a post up vote" do
+        expect(post.up_votes).to eq(1)
+    end
+   
+    it "post vote belongs to the user" do
+      expect(post.votes.first.user).to eq(post.user)
+    end
+    
+  end
+  
 end
