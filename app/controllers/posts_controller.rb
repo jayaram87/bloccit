@@ -1,10 +1,9 @@
 class PostsController < ApplicationController
   
   before_action :require_sign_in, except: :show
-  before_action :authorize_user, except: [:show, :new, :create]
   
   def show
-     @post = Post.find(params[:id])
+    @post = Post.find(params[:id])
   end
 
   def new
@@ -17,14 +16,18 @@ class PostsController < ApplicationController
     @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.build(post_params)
     @post.user = current_user
-
-    if @post.save
-      flash[:notice] = "Post was saved."
-      redirect_to [@topic, @post]
+    
+    if current_user || current_user.admin? || current_user.moderator?
+      if @post.save
+        flash[:notice] = "Post was saved."
+        redirect_to [@topic, @post]
+      else
+        flash.now[:alert] = "There was an error saving the post. Please try again."
+        render :new
+      end
     else
-      flash.now[:alert] = "There was an error saving the post. Please try again."
-      render :new
-    end
+      render :show
+    end  
   end
 
   def edit
@@ -34,24 +37,34 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     @post.assign_attributes(post_params)
-
-    if @post.save
-      flash[:notice] = "Post was updated."
-      redirect_to [@post.topic, @post]
+    @post.user = current_user
+    
+    if current_user || current_user.admin? || current_user.moderator?
+      if @post.save
+        flash[:notice] = "Post was updated."
+        redirect_to [@post.topic, @post]
+      else
+        flash.now[:alert] = "There was an error saving the post. Please try again."
+        render :edit
+      end
     else
-      flash.now[:alert] = "There was an error saving the post. Please try again."
-      render :edit
+      render :show
     end
   end
 
   def destroy
     @post = Post.find(params[:id])
+    @post.user = current_user
 
-    if @post.destroy
-      flash[:notice] = "\"#{@post.title}\" was deleted successfully."
-      redirect_to @post.topic
+    if current_user || current_user.admin?
+      if @post.destroy
+        flash[:notice] = "\"#{@post.title}\" was deleted successfully."
+        redirect_to @post.topic
+      else
+        flash.now[:alert] = "There was an error deleting the post."
+        render :show
+      end
     else
-      flash.now[:alert] = "There was an error deleting the post."
       render :show
     end
   end
