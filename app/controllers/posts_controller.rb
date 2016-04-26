@@ -7,7 +7,6 @@ class PostsController < ApplicationController
   end
 
   def new
-    @topic = Topic.find(params[:topic_id])
     @post = Post.new
   end
 
@@ -26,7 +25,7 @@ class PostsController < ApplicationController
         render :new
       end
     else
-      render :show
+      redirect_to [@topic,@post]
     end  
   end
 
@@ -48,7 +47,7 @@ class PostsController < ApplicationController
         render :edit
       end
     else
-      render :show
+      redirect_to [@topic,@post]
     end
   end
 
@@ -65,7 +64,7 @@ class PostsController < ApplicationController
         render :show
       end
     else
-      render :show
+      redirect_to [@topic,@post]
     end
   end
   

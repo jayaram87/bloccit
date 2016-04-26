@@ -26,7 +26,7 @@ class TopicsController < ApplicationController
                 render :new
             end
         else
-            render :show
+            redirect_to @topic
         end
 
     end
@@ -49,7 +49,7 @@ class TopicsController < ApplicationController
                 render :edit
             end
         else
-            render :show
+            redirect_to @topic
         end
 
     end
@@ -66,7 +66,7 @@ class TopicsController < ApplicationController
                 render :show
             end
         else
-            render :show
+            redirect_to @topic
         end
     
     end
