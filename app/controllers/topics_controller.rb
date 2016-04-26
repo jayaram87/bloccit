@@ -12,6 +12,9 @@ class TopicsController < ApplicationController
     
     def new
         @topic = Topic.new
+        unless current_user.admin? || current_user == @topic.user
+            redirect_to @topic
+        end
     end
     
     def create
@@ -33,6 +36,9 @@ class TopicsController < ApplicationController
             
     def edit
         @topic = Topic.find(params[:id])
+        unless current_user.moderator? || current_user == @topic.user || current_user.admin?
+            redirect_to @topic
+        end
     end
     
     def update
