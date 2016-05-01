@@ -19,13 +19,13 @@ class PostsController < ApplicationController
     if current_user || current_user.admin? || current_user.moderator?
       if @post.save
         flash[:notice] = "Post was saved."
-        redirect_to [@topic, @post]
+        redirect_to [@post.topic, @post]
       else
         flash.now[:alert] = "There was an error saving the post. Please try again."
         render :new
       end
     else
-      redirect_to [@topic,@post]
+      redirect_to @post.topic
     end  
   end
 
@@ -47,7 +47,7 @@ class PostsController < ApplicationController
         render :edit
       end
     else
-      redirect_to [@topic,@post]
+      redirect_to @post.topic
     end
   end
 
@@ -64,7 +64,7 @@ class PostsController < ApplicationController
         render :show
       end
     else
-      redirect_to [@topic,@post]
+      redirect_to @post.topic
     end
   end
   
@@ -72,15 +72,6 @@ class PostsController < ApplicationController
   
   def post_params
     params.require(:post).permit(:title, :body)
-  end
-  
-  def authorize_user
-    post = Post.find(params[:id])
-    
-    unless current_user == post.user || current_user.admin?
-      flash[:alert] = "You're either an admin or the owner of the post"
-      redirect_to [post.topic, post]
-    end
   end
   
 end
