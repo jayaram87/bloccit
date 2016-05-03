@@ -25,7 +25,7 @@ class PostsController < ApplicationController
         render :new
       end
     else
-      redirect_to @post.topic
+      redirect_to @topic
     end  
   end
 
@@ -47,7 +47,7 @@ class PostsController < ApplicationController
         render :edit
       end
     else
-      redirect_to @post.topic
+      redirect_to @post
     end
   end
 
