@@ -16,10 +16,6 @@ class ApplicationController < ActionController::Base
     end
     
     def topic_comment(comment)
-        @topic = Topic.find(params[:topic_id])
-        comment = @topic.comments.new(comment_params)
-        comment.user = current_user
-        
         if comment.save
             flash[:notice] = "Topic Comment was saved"
             redirect_to @topic
