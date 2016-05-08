@@ -6,6 +6,7 @@ class Post < ActiveRecord::Base
     has_many :favorites, dependent: :destroy
     has_many :labelings, as: :labelable
     has_many :labels, through: :labelings
+    after_create :create_favorite
     
     validates :title, length: {minimum: 5}, presence: true
     validates :body, length: {minimum: 20}, presence: true
@@ -32,5 +33,8 @@ class Post < ActiveRecord::Base
         update_attribute(:rank, new_rank)
     end
     
-    
+    def create_favorite
+        Favorite.create(post: self, user: self.user)
+        FavoriteMailer.new_post(self.user, self).deliver_now
+    end
 end
