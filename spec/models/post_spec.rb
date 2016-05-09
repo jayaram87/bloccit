@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe Post, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
   
-  let(:title) { RandomData.random_sentence }
-  let(:body) { RandomData.random_paragraph }
-  let(:topic){Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph)}
-  let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
-  let(:post) { topic.posts.create!(title: title, body: body, user: user) }
+  let(:title) { post.title }
+  let(:body) { post.body }
+  let(:topic){create(:topic)}
+  let(:user) {create(:user)}
+  let(:post) {create(:post)}
   
   it {is_expected.to belong_to(:topic)}
   it {is_expected.to belong_to(:user)}
