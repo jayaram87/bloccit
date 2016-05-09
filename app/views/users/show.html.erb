@@ -23,3 +23,14 @@
 <%= render @user.posts %>
 <h2>Comments</h2>
 <%= render @user.comments %>
+
+<h2>Favorited Posts</h2>
+<% if @user.favorites.where(post: Post.find(params[:post_id])? %>
+    <% @user.posts.each |post| do %>
+        <%= post.title %>
+        <%= pluralize(post.comments.count, 'comment') %>
+        <%= pluralize(post.votes.count, 'vote') %>
+    <% end %>
+    <div class="media-left"><%= image_tag @user.avatar_url(128), class: 'media-object' %></div>
+<% end %>    
+        
