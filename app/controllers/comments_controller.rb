@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
             @topic = Topic.find(params[:topic_id])
             @comment.topic = @topic
             
-            if comment.save
+            if @comment.save
                 flash[:notice] = "Topic Comment was saved"
                 redirect_to @topic
             else
@@ -19,16 +19,45 @@ class CommentsController < ApplicationController
     
         else
             # create comment for post
+            @post = Post.find(params[:post_id])
+            @comment.post = @post
+                
+            if @comment.save
+                flash[:notice] = "Post Comment was saved"
+                redirect_to [@post.topic, @post]
+            else
+                flash[:alert] = "Comment was not saved"
+                redirect_to [@post.topic, @post]
+            end
         end    
         
     end
     
     def destroy
         @comment = Comment.find(params[:id])
-        if @comment == Topic.comments.find(params[:id])
-            delete_topic_comment(@comment)
-        elsif @comment == Post.comments.find(params[:id])
-            delete_post_comment(@comment)
+        if params[:topic_id]
+            @topic = Topic.find(params[:topic_id])
+            @comment.topic = @topic
+            
+            if @comment.destroy
+                flash[:notice] = "Topic Comment was deleted"
+                redirect_to @topic
+            else
+                flash[:alert] = "Comment was not deleted"
+                redirect_to @topic
+            end
+        else
+            @post = Post.find(params[:post_id])
+            @comment.post = @post
+                
+            if @comment.destroy
+                flash[:notice] = "Post Comment was deleted"
+                redirect_to [@post.topic, @post]
+            else
+                flash[:alert] = "Comment was not deleted"
+                redirect_to [@post.topic, @post]
+            end
+            
         end
     end
     

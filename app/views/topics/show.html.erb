@@ -16,7 +16,7 @@
        <%= render partial: "comments/comment", locals: {parent: @topic} %>
     </div>
     <% if current_user %>
-      <%= render 'comments/form', comment: Comment.new, post: @topic %>
+      <%= render 'comments/form', comment: Comment.new, parent: @topic %>
     <% end %>
         <% @topic.posts.each do |post| %>
             <div class="media">
