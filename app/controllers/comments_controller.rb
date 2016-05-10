@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
     
     def create
         @comment = Comment.new(comment_params)
+        @current_user = @comment.user
         if params[:topic_id]
             # create comment for topic
             @topic = Topic.find(params[:topic_id])
@@ -35,6 +36,7 @@ class CommentsController < ApplicationController
     
     def destroy
         @comment = Comment.find(params[:id])
+        @current_user = @comment.user
         if params[:topic_id]
             @topic = Topic.find(params[:topic_id])
             @comment.topic = @topic
