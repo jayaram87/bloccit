@@ -36,10 +36,12 @@
     <h3>
       <%= pluralize(@post.points, 'point') %>
       <div>
+        <div class="votes">
         <small>
           <%= pluralize(@post.up_votes, 'Up Vote') %>
           <%= pluralize(@post.down_votes, 'Down Vote') %>
         </small>
+        </div>
       </div>  
     </h3>
     <% if current_user %>
