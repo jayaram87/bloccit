@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
     
     def create
         @comment = Comment.new(comment_params)
-        @current_user = @comment.user
+        @comment.user = current_user
         if params[:topic_id]
             # create comment for topic
             @topic = Topic.find(params[:topic_id])
@@ -36,10 +36,8 @@ class CommentsController < ApplicationController
     
     def destroy
         @comment = Comment.find(params[:id])
-        @current_user = @comment.user
         if params[:topic_id]
             @topic = Topic.find(params[:topic_id])
-            @comment.topic = @topic
             
             if @comment.destroy
                 flash[:notice] = "Topic Comment was deleted"
@@ -50,8 +48,7 @@ class CommentsController < ApplicationController
             end
         else
             @post = Post.find(params[:post_id])
-            @comment.post = @post
-                
+           
             if @comment.destroy
                 flash[:notice] = "Post Comment was deleted"
                 redirect_to [@post.topic, @post]
