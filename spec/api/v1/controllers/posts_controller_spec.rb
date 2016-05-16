@@ -1,6 +1,6 @@
 require 'rails_helper'
  
-RSpec.describe Api::V1::TopicsController, type: :controller do
+RSpec.describe Api::V1::PostsController, type: :controller do
     let(:my_user) { create(:user) }
     let(:my_topic) { create(:topic) }
     let(:my_post) { create(:post, user: my_user, topic: my_topic) }
@@ -12,10 +12,9 @@ RSpec.describe Api::V1::TopicsController, type: :controller do
         end
  
         it "GET show returns http success" do
-            get :show, id: my_topic.id
+            get :show, id: my_post.id
             expect(response).to have_http_status(:success)
         end
-        
     end
  
     context "unauthorized user" do
@@ -29,7 +28,7 @@ RSpec.describe Api::V1::TopicsController, type: :controller do
         end
  
         it "GET show returns http success" do
-            get :show, id: my_topic.id
+            get :show, id: my_post.id
             expect(response).to have_http_status(:success)
         end
     end
