@@ -20,13 +20,13 @@
 </div>
  
 <h2>Posts</h2>
-<% if @user.posts != nil %>
+<% if has_posts?(@user) %>
     <%= render @user.posts %>
 <% else %>
     <small><%= "#{@user.name} has not submitted any posts yet" %></small>
 <% end %>
 <h2>Comments</h2>
-<% if @user.comments != nil %>
+<% if has_comments?(@user) %>
     <%= render @user.comments %>
 <% else %>
     <small><%= "#{@user.name} has not submitted any comments yet" %></small>
@@ -35,7 +35,7 @@
 <h2>Favorited Post</h2>
 <% @user.favorites.each do |favorite| %>
     <br />
-    <small><%= "#{favorite.post.title}" %></small>
+    <small><%= link_to "#{favorite.post.title}", topic_post_path(topic_id: favorite.post.topic.id, id: favorite.post.id) %></small>
     <% avatar_url = @user.avatar_url(40) %>
     <% if avatar_url %>
         <div class="media-left">
