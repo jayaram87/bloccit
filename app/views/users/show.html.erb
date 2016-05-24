@@ -20,17 +20,29 @@
 </div>
  
 <h2>Posts</h2>
-<%= render @user.posts %>
+<% if @user.posts != nil %>
+    <%= render @user.posts %>
+<% else %>
+    <small><%= "#{@user.name} has not submitted any posts yet" %></small>
+<% end %>
 <h2>Comments</h2>
-<%= render @user.comments %>
+<% if @user.comments != nil %>
+    <%= render @user.comments %>
+<% else %>
+    <small><%= "#{@user.name} has not submitted any comments yet" %></small>
+<% end %>
 
-<h2>Favorited Posts</h2>
-<% if @user.favorites.where(post: Post.find(params[:post_id])? %>
-    <% @user.posts.each |post| do %>
-        <%= post.title %>
-        <%= pluralize(post.comments.count, 'comment') %>
-        <%= pluralize(post.votes.count, 'vote') %>
+<h2>Favorited Post</h2>
+<% @user.favorites.each do |favorite| %>
+    <br />
+    <small><%= "#{favorite.post.title}" %></small>
+    <% avatar_url = @user.avatar_url(40) %>
+    <% if avatar_url %>
+        <div class="media-left">
+            <%= image_tag avatar_url, class: 'media-object' %>
+        </div>
     <% end %>
-    <div class="media-left"><%= image_tag @user.avatar_url(128), class: 'media-object' %></div>
-<% end %>    
+    <%= render partial: 'votes/voter', locals: {post: favorite.post} %>
+    <p6><%= "Nbr of comments: #{favorite.post.comments.count}" %></p6>
+<% end %>
         
