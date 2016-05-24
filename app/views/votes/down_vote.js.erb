@@ -1,1 +1,1 @@
-$('.votes').html("<%= render partial: 'votes/voter', locals: {post: post} %>");
+$('.votes').html("<%= Rails.logger.info("HELLO"); render partial: 'votes/voter', locals: {post: @post} %>");
