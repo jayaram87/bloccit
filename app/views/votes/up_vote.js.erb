@@ -1,1 +1,2 @@
-$('.votes').html("<%= render partial: 'votes/voter', locals: {post: @post} %>");
+$('.post-<%= @post.id %>-points').html("<%= @post.points %>");
+

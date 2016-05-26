@@ -23,8 +23,6 @@ class VotesController < ApplicationController
     def update_vote(value)
         @post = Post.find(params[:post_id])
         @vote = @post.votes.where(user_id: current_user.id).first
-        Rails.logger.info @vote.inspect
-        Rails.logger.info "Value: #{value}"
         
         if @vote
             @vote.update_attribute(:value, value)

@@ -1,5 +1,7 @@
 <div>
-  <%= render partial: 'votes/voter', locals: {post: @post} %>
+  <div class="jay">
+    <%= render partial: 'votes/voter', locals: {post: @post} %>
+  </div>
   <h1><%= @post.title %>
     <small>
       Submitted by <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %>
