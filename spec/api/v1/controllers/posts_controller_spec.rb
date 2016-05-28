@@ -51,32 +51,29 @@ RSpec.describe Api::V1::PostsController, type: :controller do
         end
  
         describe "PUT update" do
-            #before { put :update, topic_id: my_topic.id, id: my_post.id, post: {title: @new_post.title, body: @new_post.body} }
+            before { put :update, topic_id: my_topic.id, id: my_post.id, post: {title: @new_post.title, body: @new_post.body} }
  
             it "returns http success" do
-                puts @new_post.title
-                puts my_post.inspect
-                put :update, topic_id: my_topic.id, id: my_post.id, post: {title: @new_post.title, body: @new_post.body} 
                 expect(response).to have_http_status(:success)
             end
  
             it "returns json content type" do
-                put :update, topic_id: my_topic.id, id: my_post.id, post: {title: @new_post.title, body: @new_post.body} 
-                expect(response.content_type).to eq 'application/json'
+               expect(response.content_type).to eq 'application/json'
             end
  
             it "updates a post with the correct attributes" do
-                put :update, topic_id: my_topic.id, id: my_post.id, post: {title: @new_post.title, body: @new_post.body} 
                 updated_post = Post.find(my_post.id)
                 expect(response.body).to eq(updated_post.to_json)
             end
         end
         
         describe "POST create" do
-            before { post :create, topic_id: my_topic.id, post: {title: @new_post.title, body: @new_post.body} }
- 
+            before do 
+               post :create, topic_id: my_topic.id, post: {title: @new_post.title, body: @new_post.body} 
+            end
+            
             it "returns http success" do
-                expect(response).to have_http_status(:success)
+               expect(response).to have_http_status(:success)
             end
  
             it "returns json content type" do

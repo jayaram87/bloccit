@@ -3,8 +3,9 @@ class Api::V1::PostsController < Api::V1::BaseController
     before_action :authorize_user, only: [:create, :update, :destroy]
     
     def create
-        topic = Topic.find(params[:id])
+        topic = Topic.find(params[:topic_id])
         post = topic.posts.new(post_params)
+        post.user = @current_user
         
         if post.valid?
             post.save!
@@ -17,7 +18,7 @@ class Api::V1::PostsController < Api::V1::BaseController
     
     def update
         post = Post.find(params[:id])
-        
+       
         if post.update_attributes(post_params)
             render json: post, status: 200
         else
@@ -39,6 +40,6 @@ class Api::V1::PostsController < Api::V1::BaseController
     
     private
     def post_params
-        params.require(:user).permit(:title, :body)    
+        params.require(:post).permit(:title, :body)    
     end
 end
