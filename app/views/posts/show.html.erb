@@ -1,5 +1,7 @@
 <div>
-  <%= render partial: 'votes/voter', locals: {post: @post} %>
+  <div class="jay">
+    <%= render partial: 'votes/voter', locals: {post: @post} %>
+  </div>
   <h1><%= @post.title %>
     <small>
       Submitted by <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %>
@@ -36,10 +38,12 @@
     <h3>
       <%= pluralize(@post.points, 'point') %>
       <div>
+        <div class="votes">
         <small>
           <%= pluralize(@post.up_votes, 'Up Vote') %>
           <%= pluralize(@post.down_votes, 'Down Vote') %>
         </small>
+        </div>
       </div>  
     </h3>
     <% if current_user %>
